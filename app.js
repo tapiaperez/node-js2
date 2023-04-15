@@ -44,7 +44,7 @@ app.use(express.static(__dirname + "/public"));
 
 //Rutas Web 
 app.use('/', require('./router/RutasWeb'));
-app.use('/mascotas', require('./router/Mascotas'));
+app.use('/mascotas', require('./router/mascotas'));
 
   app.get("/nosotros", (req, res) => {
     res.render("nosotros", { titulo: "Nosotros EJS" });
