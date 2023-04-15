@@ -5,18 +5,16 @@
  const cors = require("cors");
  app.use(cors());
 
-// const usuario = "youtube_curso"
-// const password = "L7kWP65TmE52VcFK"
-// const dbName = "veterinaria"
+
  const port = process.env.PORT ||  3000;
 
  app.listen(port,()=> {    console.log(`http://localhost:${port}`)
  });
-// const uri = `mongodb+srv://${usuario}:${password}@clustertapia.vd7ra7g.mongodb.net/${dbName}?retryWrites=true&w=majority`;
-// //mongodb+srv://edgartapiaperez:<password>@clustertapia.vd7ra7g.mongodb.net/?retryWrites=true&w=majority
-// mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-//   .then(()=> console.log('conectado a mongodb')) 
-//   .catch(e => console.log('error de conexión', e))
+ const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@clustertapia.vd7ra7g.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+ //const uri = `mongodb+srv://${usuario}:${password}@clustertapia.vd7ra7g.mongodb.net/${dbName}?retryWrites=true&w=majority`;
+ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+   .then(()=> console.log('conectado a mongodb')) 
+   .catch(e => console.log('error de conexión', e))
 
   
 
@@ -44,17 +42,9 @@ app.set('views',__dirname + "/views");
 
 app.use(express.static(__dirname + "/public"));
 
-app.get('/', (req, res)=> {
-  //console.log(___dirname)
-  res.render("index",{titulo : "Mi titulo dinamico"})
-})
-app.get("/", (req, res) => {
-    res.render("index", { titulo: "inicio EJS" });
-  });
-  
-  app.get("/servicios", (req, res) => {
-    res.render("servicios", { tituloservicios :  "Este es un mensaje dinamico de servicios" });
-  });
+//Rutas Web 
+app.use('/', require('./router/RutasWeb'));
+app.use('/mascotas', require('./router/Mascotas'));
 
   app.get("/nosotros", (req, res) => {
     res.render("nosotros", { titulo: "Nosotros EJS" });

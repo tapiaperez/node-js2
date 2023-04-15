@@ -1,0 +1,30 @@
+<%- include("template/cabecera",{tituloweb:"Paguina de servicios"}) %>
+
+    <div class="container">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">nombre</th>
+                        <th scope="col">descripcion</th>
+                        <th scope="col">accion</th>
+                      </tr>
+                </thead>
+                <tbody>
+                        <% if (arratMascotas.length  > 0 ) { %>       
+                            <% arratMascotas.forEach(mascota => { %>
+                                <tr>
+                                    <th scope="row"><%= mascota.id %> </th>
+                                    <td><%= mascota.nombre %></td>
+                                    <td><%= mascota.descripcion %></td>
+                                    <td><%= mascota.accion %></td>
+                                  </tr>   
+                            <% }) %>
+                        <% } %>
+                           
+                    </tbody>
+                  </table>
+                </div>
+
+
+<%- include("template/footer") %> 
