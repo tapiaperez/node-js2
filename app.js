@@ -1,9 +1,18 @@
  require("dotenv").config();
  const express = require('express');
+ const bodyParser = require('body-parser');
  const mongoose = require('mongoose');
  const app = express();
  const cors = require("cors");
+
  app.use(cors());
+
+
+ // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json()) 
+
 
 
  const port = process.env.PORT ||  3000;
@@ -44,7 +53,7 @@ app.use(express.static(__dirname + "/public"));
 
 //Rutas Web 
 app.use('/', require('./router/RutasWeb'));
-app.use('/mascotas', require('./router/mascotas'));
+app.use('/mascotas', require('./router/Mascotas'));
 
   app.get("/nosotros", (req, res) => {
     res.render("nosotros", { titulo: "Nosotros EJS" });
